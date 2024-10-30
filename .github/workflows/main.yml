@@ -30,3 +30,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/devopsho:latest
+
+      - name: Deploy - Run Docker Container
+        run: |
+          docker run --rm ${{ secrets.DOCKER_USERNAME }}/devopsho:latest -u "https://news.ycombinator.com/" -o "stdout"
