@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: link-extractor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: link-extractor
+  template:
+    metadata:
+      labels:
+        app: link-extractor
+    spec:
+      containers:
+      - name: link-extractor
+        image: bobocuillere/devopsho:latest
+        imagePullPolicy: Never
+        args: ["-u", "https://news.ycombinator.com/", "-o", "stdout"]
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        securityContext:
+          runAsUser: 1000
+          runAsNonRoot: true
