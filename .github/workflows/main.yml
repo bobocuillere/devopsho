@@ -1,6 +1,6 @@
 # .github/workflows/main.yml
 
-name: CI/CD Pipeline
+name: Docker Image CI
 
 on:
   push:
@@ -26,28 +26,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: docker/Dockerfile
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/devopsho:latest
-
-  deploy:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Kubectl
-        uses: azure/setup-kubectl@v3
-        with:
-          version: 'latest'
-
-      - name: Configure Kubernetes Credentials
-        env:
-          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
-        run: |
-          echo "${KUBECONFIG_DATA}" | base64 --decode > $HOME/.kube/config
-
-      - name: Deploy to Kubernetes
-        run: |
-          kubectl apply -f kubernetes/deployment.yml
