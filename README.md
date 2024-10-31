@@ -1,1 +1,1 @@
-# devopsho
+This project demonstrates skills in DevOps and SRE practices. It involves developing a Python program to extract URLs from web pages, containerizing the application with Docker, deploying it using Kubernetes, setting up a CI/CD pipeline, and performing text processing using Unix command-line tools.
