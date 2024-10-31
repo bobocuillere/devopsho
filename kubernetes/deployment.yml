@@ -15,7 +15,7 @@ spec:
       containers:
       - name: link-extractor
         image: bobocuillere/devopsho:latest
-        imagePullPolicy: Never
+        # imagePullPolicy: Never
         args: ["-u", "https://news.ycombinator.com/", "-o", "stdout"]
         resources:
           limits:
